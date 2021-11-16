@@ -1,0 +1,16 @@
+on: [push, pull_request]
+jobs:
+    openapi_check:
+      name: "deutschland API generator"
+      runs-on: ubuntu-latest
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - name: "Generate deutschland code"
+          uses: wirthual/deutschland-generator-action@v0.2.2
+          with:
+            version: 0.0.1
+            package-name: "NAME"
+            openapi-file: ${{ github.workspace }}/openapi.yaml
+            upload-to-pypi: false
+            use-testpypi: true
+            pypi-token: ${{ secrets.TEST_PYPI_API_TOKEN }}
